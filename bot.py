@@ -32,15 +32,17 @@ def wait_picture(update: Update, context: CallbackContext) -> int:
      photo_file = update.message.photo[-1].get_file()
 
      timestr = time.strftime("%Y%m%d-%H%M%S")
-     filename = str(user.username)+"_"+timestr
-     photo_file.download(filename)
-     logger.info("Photo of %s: %s", user.first_name, filename)
+     input_filename = str(user.username)+"_"+timestr
+     photo_file.download(input_filename)
+     logger.info("Photo of %s: %s", user.first_name, input_filename)
 
      #process photo
-     output_filename = paletter.generate_palette_from_image(filename, expected_colors=5, width=200, height=200, dpi=1200)
-     
+     output_filename = paletter.generate_palette_from_image(input_filename, expected_colors=5, width=300, height=300, dpi=1200)
+
      # send result back
      send_palette(update, context, output_filename) 
+
+     clear_files(input_filename, output_filename)
 
 def clear_files(input_filename: str, output_filename: str):
      if os.path.exists(input_filename):

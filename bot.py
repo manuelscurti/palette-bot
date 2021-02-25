@@ -133,7 +133,7 @@ def main() -> None:
     # Create the Updater and pass it your bot's token.
 
 
-    updater = Updater("1643470843:AAHto026moyTLXUyXEd0nFcv4-HF_paS-Ic")
+    updater = Updater(os.environ["BOT_TOKEN"])
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

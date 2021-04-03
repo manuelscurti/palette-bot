@@ -29,6 +29,14 @@ class BotService:
     def __init__(self, token: str, palette_service: PaletteService, upload_path: str):
         self.token = token
         self.palette_service = palette_service
+
+        if not os.path.exists(upload_path):
+            try:
+                os.makedirs(upload_path)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+
         self.upload_path = upload_path
 
     def photo_handler(self, update: Update, context: CallbackContext):
@@ -168,5 +176,5 @@ class BotService:
 if __name__ == '__main__':
     palette_service = PaletteService(ScikitClusteringService(), MatplotlibImageService())
 
-    bot = BotService(os.environ["BOT_TOKEN"], palette_service, "../uploads/")
+    bot = BotService(os.environ["BOT_TOKEN"], palette_service, "uploads/")
     bot.start()

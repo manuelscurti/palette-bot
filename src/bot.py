@@ -168,5 +168,5 @@ class BotService:
 if __name__ == '__main__':
     palette_service = PaletteService(ScikitClusteringService(), MatplotlibImageService())
 
-    bot = BotService(os.environ["BOT_TOKEN"], palette_service, "uploads/")
+    bot = BotService(os.environ["BOT_TOKEN"], palette_service, "../uploads/")
     bot.start()
